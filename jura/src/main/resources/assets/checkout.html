@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <button id="customButton">Purchase</button>
+
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+
+        <script>
+            var handler = StripeCheckout.configure({
+                key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+                image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                locale: 'auto',
+                token: function(token) {
+                    // You can access the token ID with `token.id`.
+                    // Get the token ID to your server-side code for use.
+                }
+            });
+
+            document.getElementById('customButton').addEventListener('click', function(e) {
+                // Open Checkout with further options:
+                handler.open({
+                    name: 'Korv',
+                    description: '1 foto',
+                    zipCode: false,
+                    amount: 3000,
+                    currency: 'SEK',
+    //            shippingAddress: true,
+                    allowRememberMe: true
+                });
+                e.preventDefault();
+            });
+
+            // Close Checkout on page navigation:
+            window.addEventListener('popstate', function() {
+                handler.close();
+            });
+        </script>
+
+    </body>
+</html>

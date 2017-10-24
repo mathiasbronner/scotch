@@ -1,0 +1,5 @@
+web:
+  image: docker.deadlock.se/dwex
+  ports:
+   - "10002:8080"
+
